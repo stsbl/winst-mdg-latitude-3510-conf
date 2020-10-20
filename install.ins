@@ -38,7 +38,7 @@ Set $Uefiwol$ = GetProductProperty("wol", "")
 if ($Uefioldpw$ = "")
   Set $Uefiauth$ = ""
 else
-  Set $Uefiauth$ = "--ValSetupPwd="+$Uefioldpw$
+  Set $Uefiauth$ = "--ValSetupPwd="+'"'+$Uefioldpw$+'"'
 endif
 
 [Sub_GetVars]
@@ -47,16 +47,19 @@ Set $Hostname$ = TakeString("0", $Result$)
 Set $Result$ = GetReturnListFromSection("opsiservicecall_GetInventoryNumber")
 Set $Invnumber$ = TakeString("0", $Result$)
 
+if ($Invnumber$ = "")
+  Set $Invnumber$ = $Hostname$
+endif
+
 comment "Hostname is: " + $Hostname$
 comment "Inventory Number is: " + $Invnumber$
 
-
 [DosInAnIcon_Setup]
-"%opsiTmpDir%\%installingProdName%\files\cctk\X86_64\cctk.exe" --AdminSetupLockout=Enabled --LidSwitch=$Uefilidswitch$ --PowerOnLidOpen=$Uefipoweronopen$ --UefiBootPathSecurity=$Uefipathsecurity$ --WakeOnLan=$Uefiwol$ --PropOwnTag=$PropPlacehldr$-$Hostname$ --Asset=$Invnumber$ --SetupPwd=$Uefinewpw$ $Uefiauth$ 
+"%opsiTmpDir%\%installingProdName%\files\cctk\X86_64\cctk.exe" --AdminSetupLockout=Enabled --LidSwitch="$Uefilidswitch$" --PowerOnLidOpen="$Uefipoweronopen$" --UefiBootPathSecurity="$Uefipathsecurity$" --WakeOnLan="$Uefiwol$" --PropOwnTag="$PropPlacehldr$-$Hostname$" --Asset="$Invnumber$" --SetupPwd="$Uefinewpw$" $Uefiauth$
 
 
 [Files_Copy]
-copy -s "\\iserv\deploy\install\%installingProdName%\files\*" "%opsiTmpDir%\%installingProdName%\files\"
+copy -s "%ScriptPath%\files\*" "%opsiTmpDir%\%installingProdName%\files\"
 
 [Files_Cleanup]
 delete -sf "%opsiTmpDir%\%installingProdName%\"
@@ -78,13 +81,13 @@ Switch $ExitCode$
          Case "65"
 		 ; 65: No password provided but one is installed
                  comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
-                 Set $Uefiauth$ = "--ValSetupPwd="+$Uefinewpw$
+                 Set $Uefiauth$ = "--ValSetupPwd="+'"'+$Uefinewpw$+'"'
                  DosInAnIcon_Setup /Sysnative
          EndCase
          Case "58"
 		 ; 58: Incorrect setup password provided
                  comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
-                 Set $Uefiauth$ = "--ValSetupPwd="+$Uefinewpw$
+                 Set $Uefiauth$ = "--ValSetupPwd="+'"'+$Uefinewpw$+'"'
                  DosInAnIcon_Setup /Sysnative
          EndCase
          DefaultCase
@@ -100,7 +103,6 @@ if not($ExitCode$ = "0")
   LogError "Fatal: setup returned exit code " + $ExitCode$
   IsFatalError
 endif
-
 
 [opsiservicecall_GetPcname]
 "method":"collect_wlan_mac_hostName"
