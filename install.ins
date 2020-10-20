@@ -1,0 +1,109 @@
+[Initial]
+Message=Installiere Latitude 3510 Einstellungen...
+DefVar $PropPlacehldr$
+DefVar $Uefioldpw$
+DefVar $Uefinewpw$
+DefVar $Uefilidswitch$
+DefVar $Uefipathsecurity$
+DefVar $Uefiwol$
+DefVar $Uefiauth$
+DefVar $Newuefiauth$
+DefStringList $Result$
+DefVar $Hostname$
+DefVar $Invnumber$
+DefVar $ExitCode$
+
+
+[Actions]
+ShowBitmap "%ScriptPath%\logo.png" "MDG Latitude 3510 BIOS-Settings"
+Sub_GetProperties
+Files_Copy
+Sub_GetVars
+DosInAnIcon_Setup /Sysnative
+Sub_HandleFirstExitCode
+Files_Cleanup
+Sub_HandleExitCode
+
+
+[Sub_GetProperties]
+Set $PropPlacehldr$ = GetProductProperty("propplaceholder", "")
+Set $Uefioldpw$ = GetProductProperty("oldpw", "")
+Set $Uefinewpw$ = GetProductProperty("newpw", "")
+Set $Uefilidswitch$ = GetProductProperty("lidswitch", "")
+Set $Uefipathsecurity$ = GetProductProperty("uefipathsecurity", "")
+Set $Uefiwol$ = GetProductProperty("wol", "")
+
+if ($Uefioldpw$ = "")
+  Set $Uefiauth$ = ""
+else
+  Set $Uefiauth$ = "--ValSetupPwd="+$Uefioldpw$
+endif
+
+[Sub_GetVars]
+Set $Result$ = GetReturnListFromSection("opsiservicecall_GetPcname")
+Set $Hostname$ = TakeString("0", $Result$)
+Set $Result$ = GetReturnListFromSection("opsiservicecall_GetInventoryNumber")
+Set $Invnumber$ = TakeString("0", $Result$)
+
+comment "Hostname is: " + $Hostname$
+comment "Inventory Number is: " + $Invnumber$
+
+
+[DosInAnIcon_Setup]
+"%opsiTmpDir%\%installingProdName%\files\cctk\X86_64\cctk.exe" --AdminSetupLockout=Enabled --LidSwitch=$Uefilidswitch$ --UefiBootPathSecurity=$Uefipathsecurity$ --WakeOnLan=$Uefiwol$ --PropOwnTag=$PropPlacehldr$-$Hostname$ --Asset=$Invnumber$ --SetupPwd=$Uefinewpw$ $Uefiauth$ 
+
+
+[Files_Copy]
+copy -s "\\iserv\deploy\install\%installingProdName%\files\*" "%opsiTmpDir%\%installingProdName%\files\"
+
+[Files_Cleanup]
+delete -sf "%opsiTmpDir%\%installingProdName%\"
+
+[Sub_HandleFirstExitCode]
+; check return code
+Set $ExitCode$ = GetLastExitCode
+; checking possible errors on first run
+Switch $ExitCode$
+         Case "0"
+                 comment "Looks good: setup program gives exitcode zero. Proceed."
+         EndCase
+         Case "106"
+		 ; 106: No password installed yet
+                 comment "Let's try again without --ValSetupPwd"
+                 Set $Uefiauth$ = ""
+                 DosInAnIcon_Setup /Sysnative
+         EndCase
+         Case "65"
+		 ; 65: No password provided but one is installed
+                 comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
+                 Set $Uefiauth$ = "--ValSetupPwd="+$Uefinewpw$
+                 DosInAnIcon_Setup /Sysnative
+         EndCase
+         Case "58"
+		 ; 58: Incorrect setup password provided
+                 comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
+                 Set $Uefiauth$ = "--ValSetupPwd="+$Uefinewpw$
+                 DosInAnIcon_Setup /Sysnative
+         EndCase
+         DefaultCase
+                 comment "We can't handle this Exitcode here: " + $exitcode$
+         EndCase
+EndSwitch
+
+[Sub_HandleExitCode]
+; check return code
+Set $ExitCode$ = GetLastExitCode
+comment "GetLastExitCode: " + $ExitCode$
+if not($ExitCode$ = "0")
+  LogError "Fatal: setup returned exit code " + $ExitCode$
+  IsFatalError
+endif
+
+
+[opsiservicecall_GetPcname]
+"method":"collect_wlan_mac_hostName"
+"params":[]
+
+[opsiservicecall_GetInventoryNumber]
+"method":"collect_wlan_mac_inventoryNumber"
+"params":[]

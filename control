@@ -1,0 +1,42 @@
+[Product]
+type: localboot
+id: mdg-latitude-3510-conf
+name: MDG Latitude 3510 Konfiguration
+description: Mit diesem Paket werden grundsätzliche Systemparameter (BIOS-Settings) für die Latitude 3510-Ausschreibungsnotebooks gesetzt. 
+advice: 
+version: 1.0
+packageVersion: 1.5
+setupScript: install.ins
+
+[ProductProperty]
+name: propplaceholder
+description: Property-Tag Platzhalter
+default: MDGHAMBURG
+
+[ProductProperty]
+name: oldpw
+description: BIOS-Kennwort (bisher)
+default:
+
+[ProductProperty]
+name: newpw
+description: BIOS-Kennwort (neu)
+default:
+
+[ProductProperty]
+name: lidswitch
+description: Laptop bei Aufklappen einschalten
+default: Disabled
+
+[ProductProperty]
+name: uefipathsecurity
+description: UEFI-Pfadsicherheit
+default: AlwaysExceptInternalHdd
+
+[ProductProperty]
+name: wol
+description: Wake On Lan
+default: LanWithPxeBoot
+
+
+

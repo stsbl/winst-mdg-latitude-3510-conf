@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MUPDefinition xsi:schemaLocation="http://schemas.dell.com/openmanage/cm/2/0/mupdefinition.xsd mupdefinition.xsd" xmlns="http://schemas.dell.com/openmanage/cm/2/0/mupdefinition.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<packageinformation>
+		<name>Dell Command | Configure Package</name>
+		<version>4.1.0</version>
+		<installertype>custom</installertype>
+		<packagegrouping>single_package</packagegrouping>
+		<packagingtype>zip</packagingtype>
+		<releasetype>APP</releasetype>
+		<mupspecificationversion>2.4.3</mupspecificationversion>
+		<supportedoperatingsystems>
+      <osidentifier name="Windows10" architecture="x86" />
+	  <osidentifier name="Windows8.1" architecture="x86" />
+      <osidentifier name="Windows8" architecture="x86" />
+			<osidentifier name="Windows7" architecture="x86"/>
+			<osidentifier name="XP" architecture="x86"/>
+			<osidentifier name="Vista" architecture="x86"/>
+      <osidentifier name="Windows10" architecture="x64" />
+	  <osidentifier name="Windows8.1" architecture="x64" />
+      <osidentifier name="Windows8" architecture="x64" />
+      <osidentifier name="Windows7" architecture="x64" />
+      <osidentifier name="XP" architecture="x64" />
+      <osidentifier name="Vista" architecture="x64" />
+		</supportedoperatingsystems>
+	<content>
+		<Device componentID="99999">				
+			<Image type="APP" version="3.3.0">
+				<file>applyconfig.bat</file>
+            </Image>
+		</Device>
+	</content>
+	</packageinformation>
+	<executable>
+		<executablename>applyconfig.bat</executablename>
+	</executable>
+	<executable architecture="x64">
+		<executablename>applyconfig.bat</executablename>
+	</executable>
+	<behaviors>
+		<behavior name="attended"/>
+		<behavior name="unattended"/>
+		<behavior name="freshinstall"/>
+	</behaviors>
+	<parameters>
+		<parametermapping name="logfile">
+			<vendoroption>
+        <optionvalue switch="-" requiresvalue="true" valuedelimiter="=" enclose="&quot;">l</optionvalue>
+        <!--optionvalue switch="/" requiresvalue="true" valuedelimiter=" " enclose="&quot;">log</optionvalue-->
+			</vendoroption>
+		</parametermapping>
+    <!-- parametermapping name="nolog">
+      <vendoroption>
+        <optionvalue switch="/" requiresvalue="false">nolog</optionvalue>
+      </vendoroption>
+    </parametermapping-->
+    <parametermapping name="valsyspwd">
+      <vendoroption>
+        <optionvalue switch="-" requiresvalue="true" valuedelimiter="=">-valsyspwd</optionvalue>
+      </vendoroption>
+    </parametermapping>
+    <parametermapping name="valsetuppwd">
+      <vendoroption>
+        <optionvalue switch="-" requiresvalue="true" valuedelimiter="=">-valsetuppwd</optionvalue>
+      </vendoroption>
+    </parametermapping>
+	</parameters>
+<returncodes>
+<returncodemapping name="SUCCESS">
+<vendorreturncode>0</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Attempt to read write-only parameter.">
+<vendorreturncode>1</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Clear SEL cannot be accompanied with any other option.">
+<vendorreturncode>2</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="racreset cannot be accompanied with any other option.">
+<vendorreturncode>3</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Cannot execute command. Command, or request parameter(s), not supported in present state.">
+<vendorreturncode>4</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid sub net mask.">
+<vendorreturncode>5</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Load defaults cannot be accompanied with any other option.">
+<vendorreturncode>6</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Parameter out of range. One or more parameters in the data field of the Request are out of range.">
+<vendorreturncode>7</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Attempt to write read-only parameter.">
+<vendorreturncode>8</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Option requires an argument.">
+<vendorreturncode>9</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The Asset Tag for this system is not available.">
+<vendorreturncode>10</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The Asset Tag cannot be more than characters long.">
+<vendorreturncode>11</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The required BIOS interfaces cannot be found on this system.">
+<vendorreturncode>12</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The BIOS version information is not available.">
+<vendorreturncode>13</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="There was a problem getting the state byte.">
+<vendorreturncode>14</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The state byte is not available on this system.">
+<vendorreturncode>15</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="There was a problem setting the state byte.">
+<vendorreturncode>16</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The state byte must be a value between 0 and 255 decimal.">
+<vendorreturncode>17</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The CPU information is not available.">
+<vendorreturncode>18</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The dependent option required for this subcommand is missing in the command line.">
+<vendorreturncode>19</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Duplicate sub command has been entered.">
+<vendorreturncode>20</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The script file does contain not a valid DTK environment script signature.">
+<vendorreturncode>21</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The format of the environment variable is incorrect.">
+<vendorreturncode>22</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The --envar/-s option can only be used for a single option.">
+<vendorreturncode>23</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The --envar/-s option can only be used for report operations.">
+<vendorreturncode>24</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="There was an error opening the file.">
+<vendorreturncode>25</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="File does not have write permission.">
+<vendorreturncode>26</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The file contains invalid option.">
+<vendorreturncode>27</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="There can only be one section in the input file.">
+<vendorreturncode>28</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Bad ini file, the required section cannot be found.">
+<vendorreturncode>29</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Report operations and set operations must be separate.">
+<vendorreturncode>30</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Help is not available for the option.">
+<vendorreturncode>31</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The -x (--hex) option can only be used with -b or -r.">
+<vendorreturncode>32</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Input file not found.">
+<vendorreturncode>33</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Input file cannot be read.">
+<vendorreturncode>34</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid argument for the provided option.">
+<vendorreturncode>35</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The machine ID was not found in the file.">
+<vendorreturncode>36</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The system memory information is not available.">
+<vendorreturncode>37</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The output file could not be opened. Please make sure the path exists and the media is not write protected.">
+<vendorreturncode>38</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Could not write to output file, disk may be full.">
+<vendorreturncode>39</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The old password must be provided to set a new password using --ValSysPwd.">
+<vendorreturncode>40</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The old password must be provided to set a new password using --ValSetupPwd.">
+<vendorreturncode>41</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The option is not available or cannot be configured through this tool.">
+<vendorreturncode>42</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="There was an error setting the option.">
+<vendorreturncode>43</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The -n (--namefile) option can only be used with --pci.">
+<vendorreturncode>44</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The set operation requires sub commands.">
+<vendorreturncode>45</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The service tag for this system is not available.">
+<vendorreturncode>46</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The system ID value is not available.">
+<vendorreturncode>47</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The system information string is not available.">
+<vendorreturncode>48</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="A system error has occured.">
+<vendorreturncode>49</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Usage error.">
+<vendorreturncode>50</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The uuid information is not present on this system.">
+<vendorreturncode>51</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The manufacturing/first-power-on date information is not present on this system.">
+<vendorreturncode>52</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Version cannot be accompanied with any other option.">
+<vendorreturncode>53</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Cannot start /etc/omreg.cfg file. Please ensure /etc/omreg.cfg file is present and is valid for your environment. You can copy this file from the DTK iso.">
+<vendorreturncode>54</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="HAPI Driver Load Error.">
+<vendorreturncode>55</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Password is not required for retrieving the TPM options.">
+<vendorreturncode>56</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="There was an error setting the TPM option.">
+<vendorreturncode>57</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The setup password provided is incorrect. Please try again.">
+<vendorreturncode>58</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Unsupported device. Re-try with supported device">
+<vendorreturncode>59</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Password not changed, new password does not meet criteria.">
+<vendorreturncode>60</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Error in Validation.">
+<vendorreturncode>61</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Error in Setting the Value.">
+<vendorreturncode>62</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The password length should not exceed the maximum value.">
+<vendorreturncode>63</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="This is not a Dell machine. DCC supports only Dell machines.">
+<vendorreturncode>64</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Setup Password is required to change the setting. Use --ValSetupPwd to provide password.">
+<vendorreturncode>65</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="System Password is required to change the setting. Use --ValSysPwd to provide password.">
+<vendorreturncode>66</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The system password provided is incorrect. Please try again.">
+<vendorreturncode>67</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The Sequence list must be a comma-separated list of valid unique device names (ex: hdd,cdrom).">
+<vendorreturncode>68</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The system revision information is not available for this system.">
+<vendorreturncode>69</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The completion code information is not available for this system.">
+<vendorreturncode>70</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Please use 64-bit version of this application.">
+<vendorreturncode>71</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="cannot be modified when TPM is OFF.">
+<vendorreturncode>72</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="adddevice option not supported by this machine's BIOS">
+<vendorreturncode>73</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="usb device already present in this machine.">
+<vendorreturncode>74</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Unable to store BIOS information.">
+<vendorreturncode>75</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Duplicate entry found in the input list. Operation Aborted.">
+<vendorreturncode>76</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Typo found in the input list. Operation Aborted.">
+<vendorreturncode>77</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Asset tag can have only printable ASCII characters.">
+<vendorreturncode>78</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Multiple inputs will not be accepted.">
+<vendorreturncode>79</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid Hex format.">
+<vendorreturncode>80</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Hex value range should be 0x0 to 0xffff.">
+<vendorreturncode>81</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Only positive numeric values are acceptable.">
+<vendorreturncode>82</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Length cannot exceed two characters.">
+<vendorreturncode>83</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Range for autoon hour value should be 0 to 23(24 hour format).">
+<vendorreturncode>84</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Range for autoon minute value should be 0 to 59.">
+<vendorreturncode>85</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="This option Not supported on UEFI Bios.">
+<vendorreturncode>86</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Unable to Set Bootorder.">
+<vendorreturncode>87</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid Arguments. Unable to Set Bootorder.">
+<vendorreturncode>88</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The provided command should not combine with other suboptions.">
+<vendorreturncode>89</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The property ownership tag for this system is not available.">
+<vendorreturncode>90</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The property ownership tag cannot be more than 80 characters for non portable machines.">
+<vendorreturncode>91</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The property ownership tag is limited to 48 characters for portable systems.">
+<vendorreturncode>92</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Property ownership tag can have only printable ASCII characters.">
+<vendorreturncode>93</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Error in Setting the Value. Note : In some machines, If Hdd password or System password is set, you can't set Setup password.">
+<vendorreturncode>94</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="'admin/root' privileges required to execute this application.">
+<vendorreturncode>95</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The option related BIOS information is not available in this machine.">
+<vendorreturncode>96</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Improper Output from Bios. Please try again.">
+<vendorreturncode>97</vendorreturncode>
+</returncodemapping>
+<returncodemapping name=";Error in Bootorder.">
+<vendorreturncode>98</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Not Applicable.">
+<vendorreturncode>99</vendorreturncode>
+</returncodemapping>
+<returncodemapping name=";Uefi bootlisttype is not supported in this Machine.">
+<vendorreturncode>100</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Unable to get information specific to machine.">
+<vendorreturncode>101</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The input file is invalid.">
+<vendorreturncode>102</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="No Status Present.">
+<vendorreturncode>103</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="File Do not have configurable Options.">
+<vendorreturncode>104</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Please provide the days to enable.">
+<vendorreturncode>105</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Password is not Installed. Please try again without providing --Val">
+<vendorreturncode>106</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Please provide the old password to set the new password using --ValOwnerPwd.">
+<vendorreturncode>107</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The owner password is incorrect. Please try again.">
+<vendorreturncode>108</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Error in setting the value. Note : Setup or system password might be set on the system. Clear the password(s) and try again.">
+<vendorreturncode>109</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Owner password is not supported in file operations.">
+<vendorreturncode>110</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Password operation is not supported on the system.">
+<vendorreturncode>111</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The owner of the system has enabled the Owner Access feature. To set the Bios configuration, create setup or system password.">
+<vendorreturncode>112</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Either the system hardware or the BIOS version does not support the option. To resolve the BIOS version issue, upgrade the BIOS to the latest version.">
+<vendorreturncode>113</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Unable to get password information.">
+<vendorreturncode>114</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Please provide the start and stop values. Example: Custom:start-end.">
+<vendorreturncode>115</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The start and stop values should be in the range.">
+<vendorreturncode>116</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The stop value should be greater than the start value by 5 percentage.">
+<vendorreturncode>117</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The option is not supported in this machine.">
+<vendorreturncode>118</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Unable to set. Note: To set this Option Legacy Option rom(LegacyOrom) should be enable and SecureBoot should be disable.">
+<vendorreturncode>119</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Unable to set. Note: To set this Option bootmode(activebootlist) should be uefi and legacy option rom (LegacyOrom) should be disable.">
+<vendorreturncode>120</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Unable to set. Note: To enable this Option SecureBoot should be disable. To disable this Option SecureBoot should be disable and bootmode(ActiveBootList) should be uefi.">
+<vendorreturncode>121</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The allowed value for the option in the system are in between.">
+<vendorreturncode>122</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The option is not enabled.">
+<vendorreturncode>123</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid argument! The possible values are: 0, 1-15, and 255.">
+<vendorreturncode>124</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid argument. The arguments must be set in such a way that [Start time] less than or equal [End time] less than or equal [Charge Start time].">
+<vendorreturncode>125</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Unable to set the Non critical Threshold values.">
+<vendorreturncode>126</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Cannot set the passed value as it is not within the range. The value should be less than or equal to 'Upper Threshold Critical' and greater than or equal to 'Minimum value'">
+<vendorreturncode>127</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Error in Setting the Value. Note: To set TPM - 1. Admin Password must be set , 2. TPM must not be owned and 3. TPM must be deactivated.">
+<vendorreturncode>128</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid format! Enter the value in the 'R,G,B' format.">
+<vendorreturncode>129</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid value! Expected values are 'White', 'Red', 'Green', 'Blue', 'CustomColor1', 'CustomColor2' and 'None'">
+<vendorreturncode>130</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid value! Expected values are 'White', 'Red', 'Green', 'Blue', 'CustomColor1' and 'CustomColor2'">
+<vendorreturncode>131</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid format! Enter only one value.">
+<vendorreturncode>132</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid format! No other value is allowed with 'none'">
+<vendorreturncode>133</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid format! Duplicate entry found in the input list:">
+<vendorreturncode>134</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid operation! Set operation for attribute is not allowed using file mode">
+<vendorreturncode>135</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid format! String for attribute should contain maximum 4 characters. Supported characters are 0-9, A-F and a-f.">
+<vendorreturncode>136</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid format! String for attribute should contain maximum 8 characters. Supported characters are 0-9, A-F and a-f.">
+<vendorreturncode>137</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Invalid set operation! attribute is read-only attribute.">
+<vendorreturncode>138</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The option is not disabled.">
+<vendorreturncode>139</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="This system does not have a WMI-ACPI compliant BIOS. Update the BIOS with a compatible version, if available.">
+<vendorreturncode>140</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Couldn't get WMI-ACPI Buffer Size!!">
+<vendorreturncode>141</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="Unable to get BIOS tables or Unknown type encountered!!.">
+<vendorreturncode>142</vendorreturncode>
+</returncodemapping>
+<returncodemapping name="The dependent file is not loaded from the appropriate path, repair or reinstall to fix the issue.">
+<vendorreturncode>143</vendorreturncode>
+</returncodemapping>
+</returncodes>
+	<inventorymetadata>
+		<fullpackageidentifier>
+			<!-- is this mandatory? if so, what comes here for a script? -->
+			<msis>
+				<msi componentID="99999">
+					<upgradecode>{9EB81A47-E2B0-4B1D-A3EA-B268211F73BD}</upgradecode>
+					<version>4.1.0</version>
+				</msi>
+			</msis>
+		</fullpackageidentifier>
+	</inventorymetadata>
+</MUPDefinition>
