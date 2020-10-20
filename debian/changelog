@@ -1,5 +1,5 @@
-winst-mdg-latitude-3510-conf (2.0-1.0) UNRELEASED; urgency=medium
+winst-mdg-latitude-3510-conf (2.0-1.0) unstable; urgency=medium
 
   * Initial Release.
 
- -- Stadtteilschule Blankenese <repository@stsbl.de>  Tue, 20 Oct 2020 22:48:52 +0200
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Tue, 20 Oct 2020 23:26:42 +0200
