@@ -8,6 +8,7 @@ Standards-Version: 4.5.0
 
 Package: winst-mdg-latitude-3510-conf
 Architecture: all
-Depends: ${iserv:winst:Depends}
+Depends: ${iserv:winst:Depends},
+  stsbl-iserv-collect-wlan-mac,
 Description: ${iserv:winst:Description}
 Tag: suite::iserv, suite::iserv:deploy, role::package

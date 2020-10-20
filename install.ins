@@ -1,18 +1,18 @@
 [Initial]
 Message=Installiere Latitude 3510 Einstellungen...
-DefVar $PropPlacehldr$
-DefVar $Uefioldpw$
-DefVar $Uefinewpw$
-DefVar $Uefilidswitch$
-DefVar $Uefipoweronopen$
-DefVar $Uefipathsecurity$
-DefVar $Uefiwol$
-DefVar $Uefiauth$
-DefVar $Newuefiauth$
 DefStringList $Result$
-DefVar $Hostname$
-DefVar $Invnumber$
 DefVar $ExitCode$
+DefVar $Hostname$
+DefVar $InventoryNumber$
+DefVar $NewUefiAuth$
+DefVar $PropertyPlaceholder$
+DefVar $UefiAuth$
+DefVar $UefiLidSwitch$
+DefVar $UefiNewPassword$
+DefVar $UefiOldPassword$
+DefVar $UefiPathSecurity$
+DefVar $UefiPowerOnOpen$
+DefVar $UefiWol$
 
 
 [Actions]
@@ -25,41 +25,49 @@ Sub_HandleFirstExitCode
 Files_Cleanup
 Sub_HandleExitCode
 
-
 [Sub_GetProperties]
-Set $PropPlacehldr$ = GetProductProperty("propplaceholder", "")
-Set $Uefioldpw$ = GetProductProperty("oldpw", "")
-Set $Uefinewpw$ = GetProductProperty("newpw", "")
-Set $Uefilidswitch$ = GetProductProperty("lidswitch", "")
-Set $Uefipoweronopen$ = GetProductProperty("poweronopen", "")
-Set $Uefipathsecurity$ = GetProductProperty("uefipathsecurity", "")
-Set $Uefiwol$ = GetProductProperty("wol", "")
+Set $PropertyPlaceholder$ = GetProductProperty("propplaceholder", "")
+Set $UefiOldPassword$ = GetProductProperty("oldpw", "")
+Set $UefiNewPassword$ = GetProductProperty("newpw", "")
+Set $UefiLidSwitch$ = GetProductProperty("lidswitch", "")
+Set $UefiPowerOnOpen$ = GetProductProperty("poweronopen", "")
+Set $UefiPathSecurity$ = GetProductProperty("uefipathsecurity", "")
+Set $UefiWol$ = GetProductProperty("wol", "")
 
-if ($Uefioldpw$ = "")
-  Set $Uefiauth$ = ""
+if ($PropertyPlaceholder$ = "")
+  LogError "No property placeholder defined"
+  IsFatalError
+endif
+
+if ($UefiOldPassword$ = "")
+  Set $UefiAuth$ = ""
 else
-  Set $Uefiauth$ = "--ValSetupPwd="+'"'+$Uefioldpw$+'"'
+  Set $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiOldPassword$+'"'
 endif
 
 [Sub_GetVars]
 Set $Result$ = GetReturnListFromSection("opsiservicecall_GetPcname")
 Set $Hostname$ = TakeString("0", $Result$)
 Set $Result$ = GetReturnListFromSection("opsiservicecall_GetInventoryNumber")
-Set $Invnumber$ = TakeString("0", $Result$)
+Set $InventoryNumber$ = TakeString("0", $Result$)
 
-if ($Invnumber$ = "")
-  Set $Invnumber$ = $Hostname$
+if ($PropertyPlaceholder$ = "")
+  LogError "No property placeholder defined"
+  IsFatalError
+endif
+
+if ($InventoryNumber$ = "")
+  Set $InventoryNumber$ = $Hostname$
 endif
 
 comment "Hostname is: " + $Hostname$
-comment "Inventory Number is: " + $Invnumber$
+comment "Inventory Number is: " + $InventoryNumber$
 
 [DosInAnIcon_Setup]
-"%opsiTmpDir%\%installingProdName%\files\cctk\X86_64\cctk.exe" --AdminSetupLockout=Enabled --LidSwitch="$Uefilidswitch$" --PowerOnLidOpen="$Uefipoweronopen$" --UefiBootPathSecurity="$Uefipathsecurity$" --WakeOnLan="$Uefiwol$" --PropOwnTag="$PropPlacehldr$-$Hostname$" --Asset="$Invnumber$" --SetupPwd="$Uefinewpw$" $Uefiauth$
-
+"%opsiTmpDir%\%installingProdName%\data\cctk\X86_64\cctk.exe" --AdminSetupLockout=Enabled --LidSwitch="$UefiLidSwitch$" --PowerOnLidOpen="$UefiPowerOnOpen$" --UefiBootPathSecurity="$UefiPathSecurity$" --WakeOnLan="$UefiWol$" --PropOwnTag="$PropertyPlaceholder$-$Hostname$" --Asset="$InventoryNumber$" --SetupPwd="$UefiNewPassword$" $UefiAuth$
 
 [Files_Copy]
-copy -s "%ScriptPath%\files\*" "%opsiTmpDir%\%installingProdName%\files\"
+copy -s "%ScriptPath%\data\*" "%opsiTmpDir%\%installingProdName%\data\"
 
 [Files_Cleanup]
 delete -sf "%opsiTmpDir%\%installingProdName%\"
@@ -69,30 +77,30 @@ delete -sf "%opsiTmpDir%\%installingProdName%\"
 Set $ExitCode$ = GetLastExitCode
 ; checking possible errors on first run
 Switch $ExitCode$
-         Case "0"
-                 comment "Looks good: setup program gives exitcode zero. Proceed."
-         EndCase
-         Case "106"
-		 ; 106: No password installed yet
-                 comment "Let's try again without --ValSetupPwd"
-                 Set $Uefiauth$ = ""
-                 DosInAnIcon_Setup /Sysnative
-         EndCase
-         Case "65"
-		 ; 65: No password provided but one is installed
-                 comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
-                 Set $Uefiauth$ = "--ValSetupPwd="+'"'+$Uefinewpw$+'"'
-                 DosInAnIcon_Setup /Sysnative
-         EndCase
-         Case "58"
-		 ; 58: Incorrect setup password provided
-                 comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
-                 Set $Uefiauth$ = "--ValSetupPwd="+'"'+$Uefinewpw$+'"'
-                 DosInAnIcon_Setup /Sysnative
-         EndCase
-         DefaultCase
-                 comment "We can't handle this Exitcode here: " + $exitcode$
-         EndCase
+  Case "0"
+    comment "Looks good: setup program gives exitcode zero. Proceed."
+  EndCase
+  Case "106"
+    ; 106: No password installed yet
+    comment "Let's try again without --ValSetupPwd"
+    Set $UefiAuth$ = ""
+    DosInAnIcon_Setup /Sysnative
+  EndCase
+  Case "65"
+    ; 65: No password provided but one is installed
+    comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
+    Set $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiNewPassword$+'"'
+    DosInAnIcon_Setup /Sysnative
+  EndCase
+  Case "58"
+    ; 58: Incorrect setup password provided
+     comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
+     Set $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiNewPassword$+'"'
+     DosInAnIcon_Setup /Sysnative
+  EndCase
+  DefaultCase
+     comment "We can't handle this Exitcode here: " + $exitcode$
+  EndCase
 EndSwitch
 
 [Sub_HandleExitCode]

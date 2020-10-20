@@ -2,8 +2,8 @@
 type: localboot
 id: mdg-latitude-3510-conf
 name: MDG Latitude 3510 Konfiguration
-description: Mit diesem Paket werden grundsätzliche Systemparameter (BIOS-Settings) für die Latitude 3510-Ausschreibungsnotebooks gesetzt. 
-advice: 
+description: Mit diesem Paket werden grundsätzliche Systemparameter (BIOS-Settings) für die Latitude 3510-Ausschreibungsnotebooks gesetzt. In das Feld Asset-Tag wird, sofern vorhanden die Inventarnummer eingetragen, ansonsten der Gerätename gemäß Geräteverwaltung.
+advice: ACHTUNG: Das Feld Property- und Asset-Tag im BIOS kann einmal gefüllt werden und danach nicht mehr geändert werden.
 version: 1.0
 packageVersion: 1.5
 setupScript: install.ins
@@ -11,17 +11,17 @@ setupScript: install.ins
 [ProductProperty]
 name: propplaceholder
 description: Property-Tag Platzhalter
-default: MDGHAMBURG
+helptext: Wird zusammen mit dem Gerätename gemäß Geräteverwaltung in das Property-Tag-Feld im BIOS eingetragen.
 
 [ProductProperty]
 name: oldpw
 description: BIOS-Kennwort (bisher)
-default:
+helptext: Das bisherige Kennwort des BIOS. Wenn ein Gerät bisher kein Passwort gesetzt hat, behandelt das Paket dies automatisch, sofern keine Änderung des Passwortes geplant ist, kann hier derselbe wie bei "BIOS-Kennwort (neu)" eingetragen werden. Das BIOS der Notebooks nutzt intern das US-Tastaturlayout, daher müssen Sonderzeichen gemäß diesem eingegeben werden (z.B. & mit Shift + 7).
 
 [ProductProperty]
 name: newpw
 description: BIOS-Kennwort (neu)
-default:
+helptext: Das neue Kennwort des BIOS. Das BIOS der Notebooks nutzt intern das US-Tastaturlayout, daher müssen Sonderzeichen gemäß diesem eingegeben werden (z.B. & mit Shift + 7).
 
 [ProductProperty]
 name: lidswitch
