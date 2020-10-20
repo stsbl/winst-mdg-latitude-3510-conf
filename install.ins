@@ -4,6 +4,7 @@ DefVar $PropPlacehldr$
 DefVar $Uefioldpw$
 DefVar $Uefinewpw$
 DefVar $Uefilidswitch$
+DefVar $Uefipoweronopen$
 DefVar $Uefipathsecurity$
 DefVar $Uefiwol$
 DefVar $Uefiauth$
@@ -30,6 +31,7 @@ Set $PropPlacehldr$ = GetProductProperty("propplaceholder", "")
 Set $Uefioldpw$ = GetProductProperty("oldpw", "")
 Set $Uefinewpw$ = GetProductProperty("newpw", "")
 Set $Uefilidswitch$ = GetProductProperty("lidswitch", "")
+Set $Uefipoweronopen$ = GetProductProperty("poweronopen", "")
 Set $Uefipathsecurity$ = GetProductProperty("uefipathsecurity", "")
 Set $Uefiwol$ = GetProductProperty("wol", "")
 
@@ -50,7 +52,7 @@ comment "Inventory Number is: " + $Invnumber$
 
 
 [DosInAnIcon_Setup]
-"%opsiTmpDir%\%installingProdName%\files\cctk\X86_64\cctk.exe" --AdminSetupLockout=Enabled --LidSwitch=$Uefilidswitch$ --UefiBootPathSecurity=$Uefipathsecurity$ --WakeOnLan=$Uefiwol$ --PropOwnTag=$PropPlacehldr$-$Hostname$ --Asset=$Invnumber$ --SetupPwd=$Uefinewpw$ $Uefiauth$ 
+"%opsiTmpDir%\%installingProdName%\files\cctk\X86_64\cctk.exe" --AdminSetupLockout=Enabled --LidSwitch=$Uefilidswitch$ --PowerOnLidOpen=$Uefipoweronopen$ --UefiBootPathSecurity=$Uefipathsecurity$ --WakeOnLan=$Uefiwol$ --PropOwnTag=$PropPlacehldr$-$Hostname$ --Asset=$Invnumber$ --SetupPwd=$Uefinewpw$ $Uefiauth$ 
 
 
 [Files_Copy]

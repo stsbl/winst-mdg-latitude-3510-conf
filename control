@@ -25,6 +25,11 @@ default:
 
 [ProductProperty]
 name: lidswitch
+description: LidSwitch einschalten
+default: Enabled
+
+[ProductProperty]
+name: poweronopen
 description: Laptop bei Aufklappen einschalten
 default: Disabled
 
