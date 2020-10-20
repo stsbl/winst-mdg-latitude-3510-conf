@@ -1,0 +1,13 @@
+Source: winst-mdg-latitude-3510-conf
+Section: misc
+Priority: optional
+Maintainer: Stadtteilschule Blankenese <repository@stsbl.de>
+Build-Depends: debhelper (>= 10)
+Build-Depends-Indep: iserv3-dev
+Standards-Version: 4.5.0
+
+Package: winst-mdg-latitude-3510-conf
+Architecture: all
+Depends: ${iserv:winst:Depends}
+Description: ${iserv:winst:Description}
+Tag: suite::iserv, suite::iserv:deploy, role::package

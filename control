@@ -42,6 +42,3 @@ default: AlwaysExceptInternalHdd
 name: wol
 description: Wake On Lan
 default: LanWithPxeBoot
-
-
-
