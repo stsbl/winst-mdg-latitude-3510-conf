@@ -5,7 +5,7 @@ name: MDG Latitude 3510 Konfiguration
 description: Mit diesem Paket werden grundsätzliche Systemparameter (BIOS-Settings) für die Latitude 3510-Ausschreibungsnotebooks gesetzt. In das Feld Asset-Tag wird, sofern vorhanden die Inventarnummer eingetragen, ansonsten der Gerätename gemäß Geräteverwaltung.
 advice: ACHTUNG: Das Feld Property- und Asset-Tag im BIOS kann einmal gefüllt werden und danach nicht mehr geändert werden.
 version: 2.0
-packageVersion: 1.0
+packageVersion: 1.1
 setupScript: install.ins
 
 [ProductProperty]
