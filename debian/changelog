@@ -3,7 +3,7 @@ winst-mdg-latitude-3510-conf (2.0-1.1) unstable; urgency=medium
   * Use SetConfidential for Passwords
     Thanks to UnlimitedCookies!
 
- -- Felix Jacobi <Felix@jacobi-hamburg.net>  Sun, 22 Nov 2020 21:19:52 +0100
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Sun, 22 Nov 2020 21:21:29 +0100
 
 winst-mdg-latitude-3510-conf (2.0-1.0) unstable; urgency=medium
 
