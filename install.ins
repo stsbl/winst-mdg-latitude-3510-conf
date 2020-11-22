@@ -27,8 +27,8 @@ Sub_HandleExitCode
 
 [Sub_GetProperties]
 Set $PropertyPlaceholder$ = GetProductProperty("propplaceholder", "")
-Set $UefiOldPassword$ = GetProductProperty("oldpw", "")
-Set $UefiNewPassword$ = GetProductProperty("newpw", "")
+SetConfidential $UefiOldPassword$ = GetProductProperty("oldpw", "")
+SetConfidential $UefiNewPassword$ = GetProductProperty("newpw", "")
 Set $UefiLidSwitch$ = GetProductProperty("lidswitch", "")
 Set $UefiPowerOnOpen$ = GetProductProperty("poweronopen", "")
 Set $UefiPathSecurity$ = GetProductProperty("uefipathsecurity", "")
@@ -42,7 +42,7 @@ endif
 if ($UefiOldPassword$ = "")
   Set $UefiAuth$ = ""
 else
-  Set $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiOldPassword$+'"'
+  SetConfidential $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiOldPassword$+'"'
 endif
 
 [Sub_GetVars]
@@ -89,13 +89,13 @@ Switch $ExitCode$
   Case "65"
     ; 65: No password provided but one is installed
     comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
-    Set $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiNewPassword$+'"'
+    SetConfidential $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiNewPassword$+'"'
     DosInAnIcon_Setup /Sysnative
   EndCase
   Case "58"
     ; 58: Incorrect setup password provided
      comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
-     Set $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiNewPassword$+'"'
+     SetConfidential $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiNewPassword$+'"'
      DosInAnIcon_Setup /Sysnative
   EndCase
   DefaultCase
