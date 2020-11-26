@@ -1,6 +1,7 @@
 [Initial]
 Message=Installiere Latitude 3510 Einstellungen...
 DefStringList $Result$
+DefVar $CurrentLogLevel$
 DefVar $ExitCode$
 DefVar $Hostname$
 DefVar $InventoryNumber$
@@ -27,8 +28,13 @@ Sub_HandleExitCode
 
 [Sub_GetProperties]
 Set $PropertyPlaceholder$ = GetProductProperty("propplaceholder", "")
-SetConfidential $UefiOldPassword$ = GetProductProperty("oldpw", "")
-SetConfidential $UefiNewPassword$ = GetProductProperty("newpw", "")
+Set $CurrentLogLevel$ = GetLoglevel
+SetLogLevel=4
+Set $UefiOldPassword$ = GetProductProperty("oldpw", "")
+Set $UefiNewPassword$ = GetProductProperty("newpw", "")
+SetConfidential $UefiOldPassword$
+SetConfidential $UefiNewPassword$
+SetLogLevel=$CurrentLogLevel$
 Set $UefiLidSwitch$ = GetProductProperty("lidswitch", "")
 Set $UefiPowerOnOpen$ = GetProductProperty("poweronopen", "")
 Set $UefiPathSecurity$ = GetProductProperty("uefipathsecurity", "")
@@ -42,7 +48,7 @@ endif
 if ($UefiOldPassword$ = "")
   Set $UefiAuth$ = ""
 else
-  SetConfidential $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiOldPassword$+'"'
+  Set $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiOldPassword$+'"'
 endif
 
 [Sub_GetVars]
@@ -89,13 +95,13 @@ Switch $ExitCode$
   Case "65"
     ; 65: No password provided but one is installed
     comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
-    SetConfidential $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiNewPassword$+'"'
+    Set $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiNewPassword$+'"'
     DosInAnIcon_Setup /Sysnative
   EndCase
   Case "58"
     ; 58: Incorrect setup password provided
      comment "Let's try new Passwort as --ValSetupPwd. Maybe it ran already?"
-     SetConfidential $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiNewPassword$+'"'
+     Set $UefiAuth$ = "--ValSetupPwd="+'"'+$UefiNewPassword$+'"'
      DosInAnIcon_Setup /Sysnative
   EndCase
   DefaultCase
