@@ -2,16 +2,16 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: winst-mdg-latitude-3510-conf
 
 Files: *
-Copyright: 2020 Felix Jacobi <felix.jacobi@stsbl.de>
-           2020 Lino Jorzick <lino@jorzick.com>
+Copyright: 2021 Felix Jacobi <felix.jacobi@stsbl.de>
+           2021 Lino Jorzick <lino@jorzick.com>
 License: MIT
 
 Files: data/*
-Copyright: 2020 Dell Technologies Inc.
+Copyright: 2021 Dell Technologies Inc.
 License: proprietary
 
 Files: debian/*
-Copyright: 2020 Stadtteilschule Blankenese <repository@stsbl.de>
+Copyright: 2021 Stadtteilschule Blankenese <repository@stsbl.de>
 License: MIT
 
 License: MIT
@@ -29,7 +29,6 @@ License: MIT
  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
- CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
- TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-

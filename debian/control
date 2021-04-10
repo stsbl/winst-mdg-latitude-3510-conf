@@ -2,13 +2,15 @@ Source: winst-mdg-latitude-3510-conf
 Section: misc
 Priority: optional
 Maintainer: Stadtteilschule Blankenese <repository@stsbl.de>
-Build-Depends: debhelper (>= 10)
+Build-Depends: debhelper-compat (= 13),
+               dh-sequence-iserv,
+               dh-sequence-iserv-winst,
+               dh-sequence-stsbl
 Build-Depends-Indep: iserv3-dev
 Standards-Version: 4.5.0
 
 Package: winst-mdg-latitude-3510-conf
 Architecture: all
-Depends: ${iserv:winst:Depends},
-  stsbl-iserv-collect-wlan-mac,
+Depends: stsbl-iserv-collect-wlan-mac, ${iserv:winst:Depends}
 Description: ${iserv:winst:Description}
 Tag: suite::iserv, suite::iserv:deploy, role::package
